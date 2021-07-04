@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box, Button, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 
 export const StyledDividerContainer = styled(Box)`
   padding: 16px 0;

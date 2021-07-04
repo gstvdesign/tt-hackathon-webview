@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box, TextField, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 export const StyledContainer = styled(Box)`
   margin-left: 98px;

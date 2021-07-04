@@ -1,9 +1,8 @@
-import { Button, Typography } from '@material-ui/core';
 import React from 'react';
+import { Button } from '@material-ui/core';
 
 import {
   StyledDeleteButton,
-  StyledDescription,
   StyledDividerContainer,
   StyledDuplicateButton,
   StyledItemTask,

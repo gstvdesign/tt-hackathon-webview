@@ -1,21 +1,23 @@
 import React from 'react';
-import { Box, Button, Typography } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
+import { Link, useLocation } from 'react-router-dom';
 
 import bairesLogo from '../../assets/baires-logo.svg';
 import { StyledContainer, StyledTitle } from './styles.css';
 
 const Header = () => {
-  const handleLogoutClick = () => {};
-
+  const location = useLocation();
   return (
     <StyledContainer>
       <Box display="flex">
-        <img src={bairesLogo} />
+        <img alt="BairesDev Logo" src={bairesLogo} />
         <StyledTitle>Time Tracker</StyledTitle>
       </Box>
-      <Button color="primary" onClick={handleLogoutClick}>
-        LOGOUT
-      </Button>
+      {location.pathname === '/home' && (
+        <Link to="/">
+          <Button color="primary">LOGOUT</Button>
+        </Link>
+      )}
     </StyledContainer>
   );
 };

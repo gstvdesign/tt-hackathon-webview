@@ -1,9 +1,9 @@
-import { Input, TextField, Typography } from '@material-ui/core';
 import React from 'react';
+import { Button } from '@material-ui/core';
 
+import { StyledTitle } from '../../styles';
 import {
   StyledContainer,
-  StyledTitle,
   StyledSubtitle,
   StyledTextField,
   StyledHint,
@@ -23,6 +23,9 @@ export const RegisterTab = () => {
         variant="filled"
       />
       <StyledHint>Hint: You can track more then one day.</StyledHint>
+      <Button style={{ marginTop: '16px' }} variant="contained" color="primary">
+        Register Task
+      </Button>
       <StyledTitle>
         Here are some examples of how you can write your tasks:
       </StyledTitle>

@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
-import { Tab, Tabs, ThemeProvider, TabPanel } from '@material-ui/core';
+import React from 'react';
+import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { createGlobalStyle } from 'styled-components';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Header from './components/header';
-import { RegisterTab, ReportTab, TaskListTab } from './components/tabs/';
+import HomePage from './pages/home';
+import LoginPage from './pages/login';
 
 const GlobalStyle = createGlobalStyle`
   body, html {
     margin: 0;
     height: 100vh;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
   }
 `;
 
@@ -20,51 +27,22 @@ const materialTheme = createMuiTheme({
   },
 });
 
-const TAB = {
-  REGISTER: 0,
-  TASK_LIST: 1,
-  VISUAL_REPORT: 2,
-};
-
 function App() {
-  const [currentTab, setCurrentTab] = useState(TAB.REGISTER);
-
-  const handleTabChange = (_, newTab) => {
-    setCurrentTab(newTab);
-  };
-
-  const renderTab = () => {
-    switch (currentTab) {
-      case TAB.REGISTER:
-        return <RegisterTab />;
-      case TAB.TASK_LIST:
-        return <TaskListTab />;
-      case TAB.VISUAL_REPORT:
-        return <ReportTab />;
-    }
-  };
-
   return (
-    <React.Fragment>
+    <Router>
       <ThemeProvider theme={materialTheme}>
         <GlobalStyle />
-        <div>
-          <Header />
-          <Tabs
-            value={currentTab}
-            indicatorColor="primary"
-            textColor="primary"
-            onChange={handleTabChange}
-            aria-label="disabled tabs example"
-          >
-            <Tab label="Register task" />
-            <Tab label="Task List" />
-            <Tab label="Visual Report" />
-          </Tabs>
-          {renderTab()}
-        </div>
+        <Header />
+        <Switch>
+          <Route path="/home">
+            <HomePage />
+          </Route>
+          <Route path="/">
+            <LoginPage />
+          </Route>
+        </Switch>
       </ThemeProvider>
-    </React.Fragment>
+    </Router>
   );
 }
 

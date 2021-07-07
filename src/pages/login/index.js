@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../App";
+import { Snackbar } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 import {
   StyledButton,
@@ -18,13 +20,22 @@ const LoginPage = (props) => {
 
   const auth = React.useContext(AuthContext);
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleOpenSnackbar = () => {
+    setOpenSnackbar(true);
+  }
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  }
+
   const onSubmit = data => {
-    console.log(data);
-    
-    console.log(auth);
     if(data.username === "guest@bairesdev.com" && data.password === "1234"){
       auth.setCurrentUser(data.username);
       history.push("/home");
+    }
+    else {
+      handleOpenSnackbar();
     }
   }
 
@@ -42,6 +53,9 @@ const LoginPage = (props) => {
             </StyledTextFieldContainer>
           </form>
         </StyledFormContainer>
+        <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+          <Alert elevation={6} on onClose={handleCloseSnackbar} variant="filled" severity="error">Login failed: Please verify your credentials or contact support.</Alert>
+        </Snackbar>
       </StyledContainer>
 
       );

@@ -15,11 +15,12 @@ import {
 } from './styles.css';
 
 export const RegisterTab = () => {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, reset } = useForm();
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleOpenSnackbar = () => {
+    reset();
     setOpenSnackbar(true);
   }
   const handleCloseSnackbar = () => {

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button } from '@material-ui/core';
+import { Button, Snackbar } from '@material-ui/core';
 import axios from 'axios';
+import Alert from '@material-ui/lab/Alert';
 
 
 import { StyledTitle } from '../../styles';
@@ -15,6 +16,16 @@ import {
 
 export const RegisterTab = () => {
   const { handleSubmit, register } = useForm();
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleOpenSnackbar = () => {
+    setOpenSnackbar(true);
+  }
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  }
+
   const onSubmit = data => {
     // TODO: Send request to service
     console.log(data);
@@ -22,7 +33,8 @@ export const RegisterTab = () => {
       user_id: 1,
       user_name: "Guest",
       text: data.rawInput
-    }).then(data => console.log(data));
+    }).then(data => console.log(data))
+    .then(handleOpenSnackbar);
   }
 
   return (
@@ -71,6 +83,9 @@ export const RegisterTab = () => {
           Last Monday: design check 2h, meetings 3h, code review 5h
         </StyledSubtitle>
       </form>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert elevation={6} on onClose={handleCloseSnackbar} variant="filled" severity="success">Tasks sent successfully!</Alert>
+      </Snackbar>
     </StyledContainer>
   );
 };

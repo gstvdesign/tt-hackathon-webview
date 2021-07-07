@@ -1,7 +1,8 @@
-import React from 'react';
-import { Button, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Button, Typography, Modal, Snackbar } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
-import { StyledContainer, StyledDivider } from './style.css';
+import { StyledContainer, StyledDivider, ModalBox } from './style.css';
 import ChartBar from './ChartBar';
 
 export const ReportTab = () => {
@@ -29,6 +30,27 @@ export const ReportTab = () => {
     },
   ];
 
+  const [open, setOpen] = useState(false)
+  const [openSnackbar, setOpenSnackbar] = useState(false); 
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
+  const handleClose = () => {
+    setOpen(false);
+    setTimeout(handleOpenSnackbar, 1000);
+  }
+  const handleCancel = () => {
+    setOpen(false);
+  }
+
+  const handleOpenSnackbar = () => {
+    setOpenSnackbar(true);
+  }
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  }
+
   return (
     <StyledContainer>
       <Typography>You are missing {missingHours}</Typography>
@@ -43,7 +65,7 @@ export const ReportTab = () => {
       <Typography style={{ fontSize: '24px', marginBottom: '16px' }}>
         You need to send your report in {reportingDays}
       </Typography>
-      <Button variant="contained" color="primary">
+      <Button onClick={handleOpen} variant="contained" color="primary">
         Send monthly report
       </Button>
       <StyledDivider />
@@ -61,6 +83,42 @@ export const ReportTab = () => {
           {index !== charts.length - 1 && <StyledDivider />}
         </div>
       ))}
+      <Modal
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+        open={open}
+      >
+        <ModalBox>
+          <Typography style={{ fontSize: '24px', fontWeight: 'bold', margin: '16px 0' }}>
+            Send monthly report
+          </Typography>
+          <Typography style={{ fontSize: '20px', fontWeight: 'bold', margin: '16px 0', color: 'gray' }}>Project Delivery Team</Typography>
+          <Typography style={{color: 'gray', fontWeight: 'bold'}}>Monthly hours</Typography>
+          <Typography style={{color: 'gray', marginBottom: '20px'}}>160 hours</Typography>
+          <Typography style={{color: 'gray', fontWeight: 'bold'}}>Hours worked</Typography>
+          <Typography style={{color: 'gray', marginBottom: '20px'}}>180 hours</Typography>
+          <Typography style={{color: 'gray', fontWeight: 'bold'}}>Monthly Fee</Typography>
+          <Typography style={{color: 'gray', marginBottom: '20px'}}>US$ 500</Typography>
+          <Typography style={{color: 'gray', fontWeight: 'bold'}}>Total</Typography>
+          <Typography style={{color: 'gray', marginBottom: '20px'}}>US$ 562</Typography>
+          <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
+            <Button style={{ fontWeight: 'bold'}} onClick={handleCancel} variant="text" color="primary">
+              Cancel
+            </Button>
+            <Button style={{ fontWeight: 'bold'}} onClick={handleClose} variant="text" color="primary">
+              Send Report
+            </Button>
+          </div>
+        
+        </ModalBox>
+        
+      </Modal>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert elevation={6} on onClose={handleCloseSnackbar} variant="filled" severity="success">Report sent successfully!</Alert>
+      </Snackbar>
     </StyledContainer>
   );
 };

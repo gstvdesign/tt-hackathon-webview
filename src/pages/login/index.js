@@ -45,8 +45,8 @@ const LoginPage = (props) => {
         <form id="loginForm" onSubmit={handleSubmit(onSubmit)}>
           <StyledText>Welcome to the BairesDev TimeTracker.</StyledText>
           <StyledTextFieldContainer>
-            <StyledTextField label="Username" {...register("username", { required: true })} />
-            <StyledTextField $margin label="Password" type="password" {...register("password", { required: true })}/>
+            <StyledTextField label="Username" {...register("username")} />
+            <StyledTextField $margin label="Password" type="password" {...register("password")}/>
               <StyledButton type="submit" form="loginForm" variant="contained" color="primary">
                 Login
               </StyledButton>

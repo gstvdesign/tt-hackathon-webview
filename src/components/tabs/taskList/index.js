@@ -1,98 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 
 import { StyledContainer, StyledDateContainer } from './style.css';
 import TaskItem from './taskItem';
+import axios from 'axios';
 
-const MOCKED_TASKS = [
-  {
-    date: 'June, 15th',
-    tasks: [
-      {
-        description: 'Design',
-        time: '2h',
-      },
-      {
-        description: 'Written User Stories',
-        time: '3h',
-      },
-      {
-        description: 'Other - Meetings',
-        time: '2h',
-      },
-      {
-        description: 'Code Review',
-        time: '2h',
-      },
-    ],
-  },
-  {
-    date: 'June, 15th',
-    tasks: [
-      {
-        description: 'Design',
-        time: '2h',
-      },
-      {
-        description: 'Written User Stories',
-        time: '3h',
-      },
-      {
-        description: 'Other - Meetings',
-        time: '2h',
-      },
-      {
-        description: 'Code Review',
-        time: '2h',
-      },
-    ],
-  },
-  {
-    date: 'June, 15th',
-    tasks: [
-      {
-        description: 'Design',
-        time: '2h',
-      },
-      {
-        description: 'Written User Stories',
-        time: '3h',
-      },
-      {
-        description: 'Other - Meetings',
-        time: '2h',
-      },
-      {
-        description: 'Code Review',
-        time: '2h',
-      },
-    ],
-  },
-];
 
 export const TaskListTab = () => {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get('http://localhost:4000/dev/tasks/1');
+      setTasks(response.data.data);
+    })();
+  },[])
   return (
     <StyledContainer>
       <StyledDateContainer>
         <TextField
           type="date"
-          label="Pick a starting date:"
+          label="From date:"
           value=""
           InputLabelProps={{
             shrink: true,
           }}
+          disabled={true}
         />
         <TextField
           style={{ marginLeft: '16px' }}
           type="date"
-          label="Pick a starting date:"
+          label="To date:"
           value=""
           InputLabelProps={{
             shrink: true,
           }}
+          disabled={true}
         />
       </StyledDateContainer>
-      {MOCKED_TASKS.map((item) => (
+      {tasks.map((item) => (
         <TaskItem item={item} />
       ))}
     </StyledContainer>

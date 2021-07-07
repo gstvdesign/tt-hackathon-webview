@@ -56,19 +56,19 @@ export const RegisterTab = () => {
         </StyledSubtitle>
         <StyledTitle2>And you can add more than one day:</StyledTitle2>
         <StyledSubtitle>
-          Today: design check (2h) meetings (3h) code review (5h)
+          Today: design check 2h, meetings 3h, code review 5h
         </StyledSubtitle>
         <StyledSubtitle>
-          Yesterday: design check (2h) meetings (3h) Sprint planning (5h)
+          Yesterday: design check 2h, meetings 3h, Sprint planning 5h
         </StyledSubtitle>
         <StyledSubtitle>
-          2 days ago: design check (2h) meetings (3h) code review (5h)
+          2 days ago: design check 2h, meetings 3h, code review 5h
         </StyledSubtitle>
         <StyledSubtitle>
-          Last tuesday: design review (2h) meetings (3h) deployment (5h)
+          Last tuesday: design review 2h, meetings 3h, deployment 5h
         </StyledSubtitle>
         <StyledSubtitle>
-          Last Monday: design check (2h) meetings (3h) code review (5h)
+          Last Monday: design check 2h, meetings 3h, code review 5h
         </StyledSubtitle>
       </form>
     </StyledContainer>

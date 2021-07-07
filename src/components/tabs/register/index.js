@@ -31,7 +31,7 @@ export const RegisterTab = () => {
     // TODO: Send request to service
     console.log(data);
     
-    axios.post('http://d3ba54e4f82c.ngrok.io/dev/tasks', {
+    axios.post('https://d3ba54e4f82c.ngrok.io/dev/tasks', {
       user_id: 1,
       user_name: "Guest",
       text: data.rawInput

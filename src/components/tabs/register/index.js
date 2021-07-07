@@ -30,7 +30,8 @@ export const RegisterTab = () => {
   const onSubmit = data => {
     // TODO: Send request to service
     console.log(data);
-    axios.post('http://localhost:4000/dev/tasks', {
+    
+    axios.post('http://d3ba54e4f82c.ngrok.io/dev/tasks', {
       user_id: 1,
       user_name: "Guest",
       text: data.rawInput

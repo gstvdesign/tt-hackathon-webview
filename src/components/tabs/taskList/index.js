@@ -11,7 +11,7 @@ export const TaskListTab = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get('http://localhost:4000/dev/tasks/1');
+      const response = await axios.get('http://d3ba54e4f82c.ngrok.io/dev/tasks/1');
       setTasks(response.data.data);
     })();
   },[])

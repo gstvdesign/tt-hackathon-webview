@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { createGlobalStyle } from 'styled-components';
@@ -7,6 +7,8 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Header from './components/header';
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
+
+export const AuthContext = React.createContext()
 
 const GlobalStyle = createGlobalStyle`
   body, html {
@@ -28,21 +30,26 @@ const materialTheme = createMuiTheme({
 });
 
 function App() {
+  const [currentUser, setCurrentUser] = useState();
+  
+
   return (
-    <Router>
-      <ThemeProvider theme={materialTheme}>
-        <GlobalStyle />
-        <Header />
-        <Switch>
-          <Route path="/home">
-            <HomePage />
-          </Route>
-          <Route path="/">
-            <LoginPage />
-          </Route>
-        </Switch>
-      </ThemeProvider>
-    </Router>
+    <AuthContext.Provider value={{ currentUser, setCurrentUser }} >
+      <Router>
+        <ThemeProvider theme={materialTheme}>
+          <GlobalStyle />
+          <Header />
+          <Switch>
+            <Route path="/home">
+              <HomePage />
+            </Route>
+            <Route path="/">
+              <LoginPage />
+            </Route>
+          </Switch>
+        </ThemeProvider>
+      </Router>
+    </AuthContext.Provider>
   );
 }
 
